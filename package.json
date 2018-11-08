@@ -1,0 +1,15 @@
+{
+  "name": "pinner-ipfs-b25",
+  "version": "0.0.1",
+  "description": "Pinning server for distributed network.",
+  "main": "src/bin.js",
+  "repository": "https://github.com/chren-de-large/pinner-ipfs-b25",
+  "author": "Peter Jensen",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/bin.js"
+  },
+  "dependencies": {
+    "ipfs": "^0.33.1"
+  }
+}
