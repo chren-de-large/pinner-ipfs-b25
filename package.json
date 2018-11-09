@@ -10,7 +10,6 @@
     "start": "node src/bin.js"
   },
   "dependencies": {
-    "ipfs": "^0.33.1",
-    "openpgp": "^4.2.1"
+    "ipfs": "^0.33.1"
   }
 }
