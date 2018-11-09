@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 'use strict'
+var MSGS = [];
 const IPFS = require('ipfs');
 const PUBSUB_CHANNEL = 'client-ipfs-b25';
 const ipfsRepo = './ipfs-chat';
@@ -34,6 +35,22 @@ node.on('ready', async () => {
   console.log('Version:', version.version)
   node.pubsub.subscribe(PUBSUB_CHANNEL, (encodedMsg) => {
     const data = JSON.parse(encodedMsg.data.toString());
-    console.warn('msg! ', data);
+    if (data.ev === 'message') {
+      saveMsg(data);
+    }
+    if (data.ev === 'getAllMessage') {
+      const msg = {
+        ev: 'prevMessage',
+        msgs: MSGS
+      }
+      const msgEncoded = node.types.Buffer.from(JSON.stringify(msg));
+      node.pubsub.publish(PUBSUB_CHANNEL, msgEncoded);
+      console.warn('send getAllMessage');
+    }
   });
-})
+});
+
+function saveMsg(d) {
+  MSGS.push(d);
+  if (MSGS.length > 10) MSHS.pop();
+}
